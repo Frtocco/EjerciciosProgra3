@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         int [] nums = {1,2,3,4,5,6,7,8};
@@ -6,6 +8,12 @@ public class Main {
         System.out.println("2 elevado a 8 "+potenciaDeN(2,8));
         System.out.println("2 elevado a 5 " + cualquierPotencia(2,5));
 
+        int [] arrayDesordenado = {2,1,7,4,9,0,3,2,10};
+        mergeSortDividingBy3(arrayDesordenado, 0, arrayDesordenado.length-1);
+        System.out.println(Arrays.toString(arrayDesordenado));
+
+        int [] elementoMayoritarioArray = {1,1,0,1,0,1,1,1,0,0};
+        System.out.println("Elemento mayoritario del array " +elementoMayoritario(elementoMayoritarioArray, 0, elementoMayoritarioArray.length-1));
     }
 
     // Ejercicio 2: vectores de numeros ordenados de forma creciente, determinar si x pertenece
@@ -46,6 +54,69 @@ public class Main {
             return potencia * potencia;
         }
 
+    }
+
+    public static Object elementoMayoritario(int [] a,int ini, int fin){
+        if(ini +1 == fin){
+            if(a[ini] == a[ini+1]){
+                return a[ini];
+            }else{
+                return null;
+            }
+        }else{
+            int mid = (ini+fin)/2;
+            Object izquierda = elementoMayoritario(a,ini,mid);
+            Object derecha = elementoMayoritario(a,mid, fin);
+            if(izquierda == derecha){
+                return izquierda;
+            } else if (izquierda == null){
+                return derecha;
+            } else if (derecha == null) {
+                return izquierda;
+            }else{
+                return null;
+            }
+        }
+    }
+
+    public static void mergeSort(int[] a, int start, int end){
+        if(start<end){
+            int middle = (start + end) / 2;
+            mergeSort(a, start, middle);
+            mergeSort(a, middle+1, end);
+            merge(a,start,end);
+        }
+    }
+
+    public static void merge(int[] a, int start, int end){
+        int [] w = new int[end+1];
+        int middle = (start + end) / 2;
+        int i = start;
+        int j = middle + 1;
+        for(int k=0; k<= end - start; k++){
+            if((j > end) || (a[i] <= a[j] && i < middle+1)){
+                w[k] = a[i];
+                i++;
+            } else{
+                w[k] = a[j];
+                j++;
+            }
+        }
+        for(int k=0; k<= end-start; k++){
+            a[start + k] = w[k];
+        }
+    }
+
+    public static void mergeSortDividingBy3(int[] a, int start, int end){
+        if(start<end){
+            // No funciona siempre
+            int firstPart = (start + end)/3;
+            int secondPart = firstPart*2;
+            mergeSort(a, start, firstPart);
+            mergeSort(a, firstPart, secondPart);
+            mergeSort(a, secondPart+1, end);
+            merge(a,start,end);
+        }
     }
 
 }
