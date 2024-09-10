@@ -14,6 +14,8 @@ public class Main {
 
         int [] elementoMayoritarioArray = {1,1,0,1,0,1,1,1,0,0};
         System.out.println("Elemento mayoritario del array " +elementoMayoritario(elementoMayoritarioArray, 0, elementoMayoritarioArray.length-1));
+
+        int [] equiposFutbol = {1,2,3,4,5,6,7,8};
     }
 
     // Ejercicio 2: vectores de numeros ordenados de forma creciente, determinar si x pertenece
@@ -116,6 +118,15 @@ public class Main {
             mergeSort(a, firstPart, secondPart);
             mergeSort(a, secondPart+1, end);
             merge(a,start,end);
+        }
+    }
+
+
+    public static void torneoFutbol(int [] equipos, int ini, int fin){
+        if(ini + 1 == fin){
+            System.out.println();
+        }else{
+                
         }
     }
 
